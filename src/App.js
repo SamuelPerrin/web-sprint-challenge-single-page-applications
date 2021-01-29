@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Route } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import Home from './Home';
 import Form from './Form';
 import Confirmation from './Confirmation';
@@ -67,8 +67,13 @@ const App = () => {
   return (
     <div>
       <header style={{backgroundColor: '#282c34', color: 'lime', fontFamily:'Courier'}}>
-        <h1>Lambda Eats</h1>
-        <p>Pizza so good that even people who don't like other pizza like it</p>
+        <div style={{display:'flex', flexFlow:'row nowrap', justifyContent:'space-around', alignItems:'center'}}>
+          <h1>Lambda Eats</h1>
+          <Link to="/" onClick={resetFormValues} style={{color:'white'}}>Home</Link>
+        </div>
+        <p style={{textAlign:'center'}}>
+          A new way to get grease on your keyboard
+        </p>
       </header>
 
       <Route exact path='/'>

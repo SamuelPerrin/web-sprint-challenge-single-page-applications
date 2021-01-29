@@ -32,6 +32,9 @@ export default function Form(props) {
 
   return(
     <form>
+      <h2 style={{textAlign:'center'}}>
+        Build Your Own Pizza!
+      </h2>
       <FlexForm>
         <label> Name:
           <input 
