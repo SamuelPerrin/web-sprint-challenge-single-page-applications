@@ -50,9 +50,11 @@ const App = () => {
   const submitForm = () => {
     axios
       .post('https://reqres.in/api/users', formValues)
-      .then(res => console.log("got this back from post request", res))
+      .then(res => {
+        console.log("got this back from post request", res);
+        setConfirmationRedirect(true);
+      })
       .catch(err => console.log(err));
-    setConfirmationRedirect(true);
   }
 
   const resetFormValues = () => {
