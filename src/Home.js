@@ -17,13 +17,14 @@ export default function Home() {
 }
 
 const StyledHead = styled.div`
+  font-family:'Courier New', Courier, monospace;
   color: white;
   font-size: 3rem;
   text-align: center;
   text-shadow: 2px 2px black;
   background: url(${pizza});
   height: 40vh;
-
+  
   button {
     background-color:white;
     border-radius:5px;

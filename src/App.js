@@ -66,7 +66,7 @@ const App = () => {
 
   return (
     <div>
-      <header>
+      <header style={{backgroundColor: '#282c34', color: 'lime', fontFamily:'Courier'}}>
         <h1>Lambda Eats</h1>
         <p>Pizza so good that even people who don't like other pizza like it</p>
       </header>
