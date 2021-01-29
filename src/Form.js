@@ -33,11 +33,12 @@ export default function Form(props) {
             name='username'
             value={username}
             onChange={handleChange}
+            id='username'
           />
         </label>
         <span className="error">{errors.username}</span>
         <label> Size:
-          <select name="size" value={size} onChange={handleChange}>
+          <select name="size" value={size} onChange={handleChange} id='size'>
             <option value="">Choose a size</option>
             <option value="10">10"</option>
             <option value="12">12"</option>
@@ -52,6 +53,7 @@ export default function Form(props) {
               name='pepperoni'
               checked={pepperoni}
               onChange={handleChange}
+              id='pepperoni'
             />
           </label>
           <label> Mushrooms
@@ -60,6 +62,7 @@ export default function Form(props) {
               name='mushrooms'
               checked={mushrooms}
               onChange={handleChange}
+              id='mushrooms'
             />
           </label>
           <label> Pineapple
@@ -68,6 +71,7 @@ export default function Form(props) {
               name='pineapple'
               checked={pineapple}
               onChange={handleChange}
+              id='pineapple'
             />
           </label>
           <label> Olives
@@ -76,6 +80,7 @@ export default function Form(props) {
               name='olives'
               checked={olives}
               onChange={handleChange}
+              id='olives'
             />
           </label>
         </div>
@@ -87,7 +92,7 @@ export default function Form(props) {
             onChange={handleChange}
           />
         </label>
-        <button disabled={disabled} onClick={handleSubmit}>Submit</button>
+        <button disabled={disabled} onClick={handleSubmit}>Add to Order</button>
       </form>
     </div>
   )
