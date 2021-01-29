@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 
 export default function Form(props) {
   const {
@@ -25,8 +26,8 @@ export default function Form(props) {
   }
 
   return(
-    <div>
-      <form>
+    <form>
+      <FlexForm>
         <label> Name:
           <input 
             type='text'
@@ -93,7 +94,25 @@ export default function Form(props) {
           />
         </label>
         <button disabled={disabled} onClick={handleSubmit}>Add to Order</button>
-      </form>
-    </div>
+      </FlexForm>
+    </form>
   )
 }
+
+const FlexForm = styled.div`
+  display:flex;
+  flex-flow: column nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+  
+  input {
+    margin:5px;
+  }
+  select {
+    margin:5px;
+  }  
+  label, div, button {
+    margin: 15px;
+    display:block;
+  }
+`
