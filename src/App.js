@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Route } from 'react-router-dom';
 import Home from './Home';
 import Form from './Form';
+import schema from './schema';
+import * as yup from 'yup';
 
 const initialFormValues = {
   username: '',
@@ -11,20 +13,45 @@ const initialFormValues = {
   pineapple: false,
   olives: false,
   instructions: '',
+};
+
+const initialErrors = {
+  username: '',
+  size:'',
+  pepperoni:'',
+  mushrooms:'',
+  pineapple:'',
+  olives:'',
+  instructions:''
 }
 
 const App = () => {
   const [formValues, setFormValues] = useState(initialFormValues);
+  const [errors, setErrors] = useState(initialErrors);
+  const [disabled, setDisabled] = useState(true)
 
   const updateForm = (name, value) => {
+    yup
+      .reach(schema, name)
+      .validate(value)
+      .then(() => {
+        setErrors({ ...errors, [name]:'' });
+      })
+      .catch(err => {
+        setErrors({ ...errors, [name]:err.errors[0]});
+      });
+    
     setFormValues({ ...formValues, [name]:value });
   }
 
   const submitForm = () => {
     console.log("Submitting this data", formValues)
     setFormValues(initialFormValues);
-    
   }
+
+  useEffect(() => {
+    schema.isValid(formValues).then(valid => setDisabled(!valid))
+  }, [formValues])
 
   return (
     <div>
@@ -37,7 +64,13 @@ const App = () => {
         <Home />
       </Route>
       <Route path='/pizza'>
-        <Form values={formValues} change={updateForm} submit={submitForm} />
+        <Form
+          values={formValues}
+          change={updateForm}
+          submit={submitForm}
+          errors={errors}
+          disabled={disabled}
+        />
       </Route>
 
     </div>

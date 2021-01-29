@@ -11,7 +11,7 @@ export default function Form(props) {
     instructions
   } = props.values;
 
-  const {change, submit} = props;
+  const { change, submit, errors, disabled } = props;
 
   const handleChange = (evt) => {
     const { name, value, type, checked } = evt.target;
@@ -35,6 +35,7 @@ export default function Form(props) {
             onChange={handleChange}
           />
         </label>
+        <span className="error">{errors.username}</span>
         <label> Size:
           <select name="size" value={size} onChange={handleChange}>
             <option value="">Choose a size</option>
@@ -43,6 +44,7 @@ export default function Form(props) {
             <option value="14">14"</option>
           </select>
         </label>
+        <span className="error">{errors.size}</span>
         <div> Toppings:
           <label> Pepperoni
             <input
@@ -85,7 +87,7 @@ export default function Form(props) {
             onChange={handleChange}
           />
         </label>
-        <button onClick={handleSubmit}>Submit</button>
+        <button disabled={disabled} onClick={handleSubmit}>Submit</button>
       </form>
     </div>
   )
