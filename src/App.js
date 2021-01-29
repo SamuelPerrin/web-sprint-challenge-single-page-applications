@@ -4,6 +4,7 @@ import Home from './Home';
 import Form from './Form';
 import schema from './schema';
 import * as yup from 'yup';
+import axios from 'axios';
 
 const initialFormValues = {
   username: '',
@@ -45,7 +46,11 @@ const App = () => {
   }
 
   const submitForm = () => {
-    console.log("Submitting this data", formValues)
+    axios
+      .post('https://reqres.in/api/users', formValues)
+      .then(res => console.log("got this back from post request", res))
+      .catch(err => console.log(err));
+    
     setFormValues(initialFormValues);
   }
 
