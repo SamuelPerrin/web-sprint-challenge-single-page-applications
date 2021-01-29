@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Redirect } from 'react-router-dom';
 
 export default function Form(props) {
   const {
@@ -12,7 +13,7 @@ export default function Form(props) {
     instructions
   } = props.values;
 
-  const { change, submit, errors, disabled } = props;
+  const { change, submit, errors, disabled, confirmation } = props;
 
   const handleChange = (evt) => {
     const { name, value, type, checked } = evt.target;
@@ -23,6 +24,10 @@ export default function Form(props) {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     submit();
+  }
+
+  if (confirmation) {
+    return (<Redirect to='/confirmation' />)
   }
 
   return(

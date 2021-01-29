@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Route } from 'react-router-dom';
 import Home from './Home';
 import Form from './Form';
+import Confirmation from './Confirmation';
 import schema from './schema';
 import * as yup from 'yup';
 import axios from 'axios';
@@ -18,31 +19,32 @@ const initialFormValues = {
 
 const initialErrors = {
   username: '',
-  size:'',
-  pepperoni:'',
-  mushrooms:'',
-  pineapple:'',
-  olives:'',
-  instructions:''
+  size: '',
+  pepperoni: '',
+  mushrooms: '',
+  pineapple: '',
+  olives: '',
+  instructions: ''
 }
 
 const App = () => {
   const [formValues, setFormValues] = useState(initialFormValues);
   const [errors, setErrors] = useState(initialErrors);
-  const [disabled, setDisabled] = useState(true)
+  const [disabled, setDisabled] = useState(true);
+  const [confirmationRedirect, setConfirmationRedirect] = useState(false);
 
   const updateForm = (name, value) => {
     yup
       .reach(schema, name)
       .validate(value)
       .then(() => {
-        setErrors({ ...errors, [name]:'' });
+        setErrors({ ...errors, [name]: '' });
       })
       .catch(err => {
-        setErrors({ ...errors, [name]:err.errors[0]});
+        setErrors({ ...errors, [name]: err.errors[0]});
       });
     
-    setFormValues({ ...formValues, [name]:value });
+    setFormValues({ ...formValues, [name]: value });
   }
 
   const submitForm = () => {
@@ -50,8 +52,12 @@ const App = () => {
       .post('https://reqres.in/api/users', formValues)
       .then(res => console.log("got this back from post request", res))
       .catch(err => console.log(err));
-    
+    setConfirmationRedirect(true);
+  }
+
+  const resetFormValues = () => {
     setFormValues(initialFormValues);
+    setConfirmationRedirect(false);
   }
 
   useEffect(() => {
@@ -75,9 +81,12 @@ const App = () => {
           submit={submitForm}
           errors={errors}
           disabled={disabled}
+          confirmation={confirmationRedirect}
         />
       </Route>
-
+      <Route path='/confirmation'>
+        <Confirmation values={formValues} resetFormValues={resetFormValues} />
+      </Route>
     </div>
   );
 };
